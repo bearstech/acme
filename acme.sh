@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/bin/bash
 VER=2.2.2
 
 PROJECT_NAME="acme.sh"
