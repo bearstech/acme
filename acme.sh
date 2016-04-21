@@ -758,10 +758,14 @@ _stopserver(){
 
 _initpath() {
 
-  if [ -z "$LE_WORKING_DIR" ] ; then
-    LE_WORKING_DIR=$HOME/.$PROJECT_NAME
+  if [ -z "$ACME_DIR" ] ; then
+    ACME_DIR="/etc/acme"
   fi
   
+  if [ -z "$LE_WORKING_DIR" ] ; then
+    LE_WORKING_DIR=$ACME_DIR
+  fi
+
   _DEFAULT_ACCOUNT_CONF_PATH="$LE_WORKING_DIR/account.conf"
 
   if [ -z "$ACCOUNT_CONF_PATH" ] ; then
@@ -792,10 +796,6 @@ _initpath() {
       API="$STAGE_CA"
       _info "Using stage api:$API"
     fi  
-  fi
-  
-  if [ -z "$ACME_DIR" ] ; then
-    ACME_DIR="/etc/acme"
   fi
   
   if [ -z "$APACHE_CONF_BACKUP_DIR" ] ; then
