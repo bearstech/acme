@@ -44,13 +44,13 @@ dns_cx_add() {
     return 1
   fi
 
-  if [ "$count" == "0" ] ; then
+  if [ "$count" = "0" ] ; then
     add_record $_domain $_sub_domain $txtvalue
   else
     update_record $_domain $_sub_domain $txtvalue
   fi
   
-  if [ "$?" == "0" ] ; then
+  if [ "$?" = "0" ] ; then
     return 0
   fi
   return 1
@@ -69,7 +69,7 @@ existing_records() {
     return 1
   fi
   count=0
-  seg=$(printf "$response" | grep -o "{[^{]*host\":\"$_sub_domain[^}]*}")
+  seg=$(printf "$response" | grep -o "{[^{]*host\":\"$_sub_domain\"[^}]*}")
   _debug seg "$seg"
   if [ -z "$seg" ] ; then
     return 0
@@ -144,7 +144,7 @@ _get_root() {
       return 1;
     fi
 
-    if printf "$response" | grep "$h." ; then
+    if printf "$response" | grep "$h." >/dev/null ; then
       seg=$(printf "$response" | grep -o "{[^{]*$h\.[^}]*\}" )
       _debug seg "$seg"
       _domain_id=$(printf "$seg" | grep -o \"id\":\"[^\"]*\" | cut -d : -f 2 | tr -d \")
@@ -183,11 +183,16 @@ _rest() {
   _debug sec "$sec"
   hmac=$(printf "$sec"| openssl md5 |cut -d " " -f 2)
   _debug hmac "$hmac"
-    
-  if [ "$3" ] ; then
-    response="$(curl --silent -X $m "$url" -H "API-KEY: $CX_Key" -H "API-REQUEST-DATE: $cdate" -H "API-HMAC: $hmac" -H 'Content-Type: application/json'  -d "$data")"
+  
+  _H1="API-KEY: $CX_Key"
+  _H2="API-REQUEST-DATE: $cdate"
+  _H3="API-HMAC: $hmac"
+  _H4="Content-Type: application/json"
+
+  if [ "$data" ] ; then
+    response="$(_post "$data" "$url" "" $m)"
   else
-    response="$(curl --silent -X $m "$url" -H "API-KEY: $CX_Key" -H "API-REQUEST-DATE: $cdate" -H "API-HMAC: $hmac" -H 'Content-Type: application/json')"
+    response="$(_get "$url")"
   fi
   
   if [ "$?" != "0" ] ; then

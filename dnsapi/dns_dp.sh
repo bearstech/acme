@@ -44,7 +44,7 @@ dns_dp_add() {
     return 1
   fi
 
-  if [ "$count" == "0" ] ; then
+  if [ "$count" = "0" ] ; then
     add_record $_domain $_sub_domain $txtvalue
   else
     update_record $_domain $_sub_domain $txtvalue
@@ -71,7 +71,6 @@ existing_records() {
     
   if printf "$response" | grep "Action completed successful" >/dev/null ; then
     count=$(printf "$response" | grep '<type>TXT</type>' | wc -l)
-    
     record_id=$(printf "$response" | grep '^<id>' | tail -1 | cut -d '>' -f 2 | cut -d '<' -f 1)
     return 0    
   else
@@ -152,7 +151,7 @@ _get_root() {
       return 1
     fi
     
-    if printf "$response" | grep "Action completed successful" ; then
+    if printf "$response" | grep "Action completed successful" >/dev/null ; then
       _domain_id=$(printf "$response" | grep -o \"id\":\"[^\"]*\" | cut -d : -f 2 | tr -d \")
       _debug _domain_id "$_domain_id"
       if [ "$_domain_id" ] ; then
@@ -175,17 +174,17 @@ _get_root() {
 _rest() {
   m=$1
   ep="$2"
+  data="$3"
   _debug $ep
   url="$REST_API/$ep"
   
   _debug url "$url"
   
-  if [ "$3" ] ; then
-    data="$3"
+  if [ "$data" ] ; then
     _debug2 data "$data"
-    response="$(curl --silent -X $m "$url"  -d $data)"
+    response="$(_post $data "$url")"
   else
-    response="$(curl --silent -X $m "$url" )"
+    response="$(_get "$url")"
   fi
   
   if [ "$?" != "0" ] ; then

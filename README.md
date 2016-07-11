@@ -16,20 +16,22 @@ Wiki: https://github.com/Neilpang/acme.sh/wiki
 #Tested OS
 | NO | Status| Platform|
 |----|-------|---------|
-|1|[![](https://cdn.rawgit.com/Neilpang/letest/master/status/ubuntu-latest.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)| Ubuntu
-|2|[![](https://cdn.rawgit.com/Neilpang/letest/master/status/debian-latest.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)| Debian
-|3|[![](https://cdn.rawgit.com/Neilpang/letest/master/status/centos-latest.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|CentOS
-|4|[![](https://cdn.rawgit.com/Neilpang/letest/master/status/windows.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|Windows (cygwin with curl, openssl and crontab included)
-|5|[![](https://cdn.rawgit.com/Neilpang/letest/master/status/freebsd.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|FreeBSD
-|6|[![](https://cdn.rawgit.com/Neilpang/letest/master/status/pfsense.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|pfsense
-|7|[![](https://cdn.rawgit.com/Neilpang/letest/master/status/opensuse-latest.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|openSUSE
-|8|[![](https://cdn.rawgit.com/Neilpang/letest/master/status/alpine-latest.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|Alpine Linux (with curl)
-|9|[![](https://cdn.rawgit.com/Neilpang/letest/master/status/base-archlinux.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|Archlinux
-|10|[![](https://cdn.rawgit.com/Neilpang/letest/master/status/fedora-latest.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|fedora
-|11|[![](https://cdn.rawgit.com/Neilpang/letest/master/status/kalilinux-kali-linux-docker.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|Kali Linux
-|12|[![](https://cdn.rawgit.com/Neilpang/letest/master/status/oraclelinux-latest.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|Oracle Linux
-|13|[![](https://cdn.rawgit.com/Neilpang/letest/master/status/proxmox.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)| Proxmox https://pve.proxmox.com/wiki/HTTPSCertificateConfiguration#Let.27s_Encrypt_using_acme.sh
-|14|--| Cloud Linux  https://github.com/Neilpang/le/issues/111
+|1|[![](https://cdn.rawgit.com/Neilpang/acmetest/master/status/ubuntu-latest.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)| Ubuntu
+|2|[![](https://cdn.rawgit.com/Neilpang/acmetest/master/status/debian-latest.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)| Debian
+|3|[![](https://cdn.rawgit.com/Neilpang/acmetest/master/status/centos-latest.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|CentOS
+|4|[![](https://cdn.rawgit.com/Neilpang/acmetest/master/status/windows-cygwin.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|Windows (cygwin with curl, openssl and crontab included)
+|5|[![](https://cdn.rawgit.com/Neilpang/acmetest/master/status/freebsd.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|FreeBSD
+|6|[![](https://cdn.rawgit.com/Neilpang/acmetest/master/status/pfsense.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|pfsense
+|7|[![](https://cdn.rawgit.com/Neilpang/acmetest/master/status/opensuse-latest.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|openSUSE
+|8|[![](https://cdn.rawgit.com/Neilpang/acmetest/master/status/alpine-latest.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|Alpine Linux (with curl)
+|9|[![](https://cdn.rawgit.com/Neilpang/acmetest/master/status/base-archlinux.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|Archlinux
+|10|[![](https://cdn.rawgit.com/Neilpang/acmetest/master/status/fedora-latest.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|fedora
+|11|[![](https://cdn.rawgit.com/Neilpang/acmetest/master/status/kalilinux-kali-linux-docker.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|Kali Linux
+|12|[![](https://cdn.rawgit.com/Neilpang/acmetest/master/status/oraclelinux-latest.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|Oracle Linux
+|13|[![](https://cdn.rawgit.com/Neilpang/acmetest/master/status/proxmox.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)| Proxmox https://pve.proxmox.com/wiki/HTTPSCertificateConfiguration#Let.27s_Encrypt_using_acme.sh
+|14|-----| Cloud Linux  https://github.com/Neilpang/le/issues/111
+|15|[![](https://cdn.rawgit.com/Neilpang/acmetest/master/status/openbsd.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|OpenBSD
+|16|[![](https://cdn.rawgit.com/Neilpang/acmetest/master/status/mageia.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|Mageia
 
 For all build statuses, check our [daily build project](https://github.com/Neilpang/acmetest): 
 
@@ -56,7 +58,7 @@ Nothing will be broken during the process.
 
 ### 1. Install online:
 
-Check this project:https://github.com/Neilpang/get.acme.sh
+Check this project: https://github.com/Neilpang/get.acme.sh
 
 ```bash
 curl https://get.acme.sh | sh
@@ -89,7 +91,7 @@ The installer will perform 3 actions:
 
 1. Create and copy `acme.sh` to your home dir (`$HOME`):  `~/.acme.sh/`.
 All certs will be placed in this folder.
-2. Create alia for: `acme.sh=~/.acme.sh/acme.sh`. 
+2. Create alias for: `acme.sh=~/.acme.sh/acme.sh`. 
 3. Create everyday cron job to check and renew the cert if needed.
 
 Cron entry example:
@@ -104,58 +106,8 @@ Ok, you are ready to issue cert now.
 Show help message:
 
 ```
-root@v1:~# acme.sh
-https://github.com/Neilpang/acme.sh
-v2.1.1
-Usage: acme.sh  command ...[parameters]....
-Commands:
-  --help, -h               Show this help message.
-  --version, -v            Show version info.
-  --install                Install acme.sh to your system.
-  --uninstall              Uninstall acme.sh, and uninstall the cron job.
-  --issue                  Issue a cert.
-  --installcert            Install the issued cert to apache/nginx or any other server.
-  --renew, -r              Renew a cert.
-  --renewAll               Renew all the certs
-  --revoke                 Revoke a cert.
-  --installcronjob         Install the cron job to renew certs, you don't need to call this. The 'install' command can automatically install the cron job.
-  --uninstallcronjob       Uninstall the cron job. The 'uninstall' command can do this automatically.
-  --cron                   Run cron job to renew all the certs.
-  --toPkcs                 Export the certificate and key to a pfx file.
-  --createAccountKey, -cak Create an account private key, professional use.
-  --createDomainKey, -cdk  Create an domain private key, professional use.
-  --createCSR, -ccsr       Create CSR , professional use.
 
-Parameters:
-  --domain, -d   domain.tld         Specifies a domain, used to issue, renew or revoke etc.
-  --force, -f                       Used to force to install or force to renew a cert immediately.
-  --staging, --test                 Use staging server, just for test.
-  --debug                           Output debug info.
-
-  --webroot, -w  /path/to/webroot   Specifies the web root folder for web root mode.
-  --standalone                      Use standalone mode.
-  --apache                          Use apache mode.
-  --dns [dns-cf|dns-dp|dns-cx|/path/to/api/file]   Use dns mode or dns api.
-
-  --keylength, -k [2048]            Specifies the domain key length: 2048, 3072, 4096, 8192 or ec-256, ec-384.
-  --accountkeylength, -ak [2048]    Specifies the account key length.
-
-  These parameters are to install the cert to nginx/apache or anyother server after issue/renew a cert:
-
-  --certpath /path/to/real/cert/file  After issue/renew, the cert will be copied to this path.
-  --keypath /path/to/real/key/file  After issue/renew, the key will be copied to this path.
-  --capath /path/to/real/ca/file    After issue/renew, the intermediate cert will be copied to this path.
-  --fullchainpath /path/to/fullchain/file After issue/renew, the fullchain cert will be copied to this path.
-
-  --reloadcmd "service nginx reload" After issue/renew, it's used to reload the server.
-
-  --accountconf                     Specifies a customized account config file.
-  --home                            Specifies the home dir for acme.sh .
-  --certhome                        Specifies the home dir to save all the certs, only valid for '--install' command.
-  --useragent                       Specifies the user agent string. it will be saved for future use too.
-  --accountemail                    Specifies the account email for registering, Only valid for the '--install' command.
-  --accountkey                      Specifies the account key path, Only valid for the '--install' command.
-  --days                            Specifies the days to renew the cert when using '--issue' command. The max value is 80 days.
+root@v1:~# acme.sh -h
 
 ```
  
@@ -210,12 +162,24 @@ The cert will be `renewed every 80 days by default` (which is configurable). Onc
 
 **(requires you be root/sudoer, or you have permission to listen tcp 80 port)**
 
-Same usage as above, just give `no` as `--webroot` or `-w`.
-
 The tcp `80` port **MUST** be free to listen, otherwise you will be prompted to free the `80` port and try again.
 
 ```bash
 acme.sh --issue --standalone -d aa.com -d www.aa.com -d cp.aa.com
+```
+
+More examples: https://github.com/Neilpang/acme.sh/wiki/How-to-issue-a-cert
+
+# Use Standalone tls server to issue cert
+
+**(requires you be root/sudoer, or you have permission to listen tcp 443 port)**
+
+acme.sh supports `tls-sni-01` validation.
+
+The tcp `443` port **MUST** be free to listen, otherwise you will be prompted to free the `443` port and try again.
+
+```bash
+acme.sh --issue --tls -d aa.com -d www.aa.com -d cp.aa.com
 ```
 
 More examples: https://github.com/Neilpang/acme.sh/wiki/How-to-issue-a-cert
@@ -279,6 +243,8 @@ You don't have do anything manually!
 2. Dnspod.cn API
 3. Cloudxns.com API
 4. AWS Route 53, see: https://github.com/Neilpang/acme.sh/issues/65
+5. lexicon dns api: https://github.com/Neilpang/acme.sh/wiki/How-to-use-lexicon-dns-api
+   (DigitalOcean, DNSimple, DnsMadeEasy, DNSPark, EasyDNS, Namesilo, NS1, PointHQ, Rage4 and Vultr etc.)
 
 ##### More APIs are coming soon...
 
@@ -325,7 +291,7 @@ TODO:
 # Acknowledgment
 1. Acme-tiny: https://github.com/diafygi/acme-tiny
 2. ACME protocol: https://github.com/ietf-wg-acme/acme
-3. letsencrypt: https://github.com/letsencrypt/letsencrypt
+3. Certbot: https://github.com/certbot/certbot
 
 # License & Other
 
