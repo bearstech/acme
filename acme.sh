@@ -36,7 +36,8 @@ if [ -z "$AGREEMENT" ] ; then
   AGREEMENT="$DEFAULT_AGREEMENT"
 fi
 
-
+# verbose by default (ie. CLI)
+QUIET="0"
 
 _URGLY_PRINTF=""
 if [ "$(printf '\x41')" != 'A' ] ; then
@@ -45,6 +46,9 @@ fi
 
 
 _info() {
+  if [ $QUIET -eq "1" ]; then
+      return
+  fi
   if [ -z "$2" ] ; then
     echo "[$(date)] $1"
   else
@@ -2448,6 +2452,7 @@ Parameters:
   --force, -f                       Used to force to install or force to renew a cert immediately.
   --staging, --test                 Use staging server, just for test.
   --debug                           Output debug info.
+  --quiet                           Only output errors.
     
   --webroot, -w  /path/to/webroot   Specifies the web root folder for web root mode.
   --standalone                      Use standalone mode.
@@ -2651,6 +2656,14 @@ _process() {
           DEBUG="$2"
           shift
         fi 
+        ;;
+    --quiet)
+        if [ -z "$2" ] || _startswith "$2" "-" ; then
+          QUIET="1"
+        else
+          QUIET="$2"
+          shift
+        fi
         ;;
     --webroot|-w)
         wvalue="$2"
