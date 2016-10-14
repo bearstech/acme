@@ -13,6 +13,8 @@ It's probably the `easiest&smallest&smartest` shell script to automatically issu
 
 Wiki: https://github.com/Neilpang/acme.sh/wiki
 
+# [中文说明](https://github.com/Neilpang/acme.sh/wiki/%E8%AF%B4%E6%98%8E)
+
 #Tested OS
 | NO | Status| Platform|
 |----|-------|---------|
@@ -32,6 +34,8 @@ Wiki: https://github.com/Neilpang/acme.sh/wiki
 |14|-----| Cloud Linux  https://github.com/Neilpang/le/issues/111
 |15|[![](https://cdn.rawgit.com/Neilpang/acmetest/master/status/openbsd.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|OpenBSD
 |16|[![](https://cdn.rawgit.com/Neilpang/acmetest/master/status/mageia.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|Mageia
+|17|-----| OpenWRT: Tested and working. See [wiki page](https://github.com/Neilpang/acme.sh/wiki/How-to-run-on-OpenWRT)
+|18|[![](https://cdn.rawgit.com/Neilpang/acmetest/master/status/solaris.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|SunOS/Solaris
 
 For all build statuses, check our [daily build project](https://github.com/Neilpang/acmetest): 
 
@@ -44,17 +48,9 @@ https://github.com/Neilpang/acmetest
 3. Apache mode
 4. Dns mode
 
-# Upgrade from 1.x to 2.x
 
-You can simply uninstall 1.x and re-install 2.x.
-2.x is 100% compatible to 1.x. You will feel right at home as if nothing has changed.
 
-# le.sh renamed to acme.sh NOW!
-
-All configurations are 100% compatible between `le.sh` and `acme.sh`. You just need to uninstall `le.sh` and re-install `acme.sh` again.
-Nothing will be broken during the process.
-
-# How to install
+# 1. How to install
 
 ### 1. Install online:
 
@@ -111,40 +107,40 @@ root@v1:~# acme.sh -h
 
 ```
  
-# Just issue a cert:
+# 2. Just issue a cert:
 
 **Example 1:** Single domain.
 
 ```bash
-acme.sh --issue -d aa.com -w /home/wwwroot/aa.com
+acme.sh --issue -d example.com -w /home/wwwroot/example.com
 ```
 
 **Example 2:** Multiple domains in the same cert.
 
 ```bash
-acme.sh --issue -d aa.com -d www.aa.com -d cp.aa.com -w /home/wwwroot/aa.com 
+acme.sh --issue -d example.com -d www.example.com -d cp.example.com -w /home/wwwroot/example.com 
 ```
 
-The parameter `/home/wwwroot/aa.com` is the web root folder. You **MUST** have `write access` to this folder.
+The parameter `/home/wwwroot/example.com` is the web root folder. You **MUST** have `write access` to this folder.
 
-Second argument **"aa.com"** is the main domain you want to issue cert for.
+Second argument **"example.com"** is the main domain you want to issue cert for.
 You must have at least a domain there.
 
-You must point and bind all the domains to the same webroot dir: `/home/wwwroot/aa.com`.
+You must point and bind all the domains to the same webroot dir: `/home/wwwroot/example.com`.
 
-Generate/issued certs will be placed in `~/.acme.sh/aa.com/`
+Generate/issued certs will be placed in `~/.acme.sh/example.com/`
 
-The issued cert will be renewed every 80 days automatically.
+The issued cert will be renewed every **60** days automatically.
 
 More examples: https://github.com/Neilpang/acme.sh/wiki/How-to-issue-a-cert
 
 
-# Install issued cert to apache/nginx etc.
+# 3. Install the issued cert to apache/nginx etc.
 
-After you issue a cert, you probably want to install the cert with your nginx/apache or other servers you may be using.
+After you issue a cert, you probably want to install/copy the cert to your nginx/apache or other servers you may be using.
 
 ```bash
-acme.sh --installcert -d aa.com \
+acme.sh --installcert -d example.com \
 --certpath /path/to/certfile/in/apache/nginx  \
 --keypath  /path/to/keyfile/in/apache/nginx  \
 --capath   /path/to/ca/certfile/apache/nginx   \
@@ -154,23 +150,23 @@ acme.sh --installcert -d aa.com \
 
 Only the domain is required, all the other parameters are optional.
 
-Install the issued cert/key to the production apache or nginx path.
+Install/copy the issued cert/key to the production apache or nginx path.
 
-The cert will be `renewed every 80 days by default` (which is configurable). Once the cert is renewed, the apache/nginx will be automatically reloaded by the command: `service apache2 reload` or `service nginx reload`.
+The cert will be `renewed every **60** days by default` (which is configurable). Once the cert is renewed, the apache/nginx will be automatically reloaded by the command: `service apache2 reload` or `service nginx reload`.
 
-# Use Standalone server to issue cert
+# 4. Use Standalone server to issue cert
 
 **(requires you be root/sudoer, or you have permission to listen tcp 80 port)**
 
 The tcp `80` port **MUST** be free to listen, otherwise you will be prompted to free the `80` port and try again.
 
 ```bash
-acme.sh --issue --standalone -d aa.com -d www.aa.com -d cp.aa.com
+acme.sh --issue --standalone -d example.com -d www.example.com -d cp.example.com
 ```
 
 More examples: https://github.com/Neilpang/acme.sh/wiki/How-to-issue-a-cert
 
-# Use Standalone tls server to issue cert
+# 5. Use Standalone tls server to issue cert
 
 **(requires you be root/sudoer, or you have permission to listen tcp 443 port)**
 
@@ -179,12 +175,12 @@ acme.sh supports `tls-sni-01` validation.
 The tcp `443` port **MUST** be free to listen, otherwise you will be prompted to free the `443` port and try again.
 
 ```bash
-acme.sh --issue --tls -d aa.com -d www.aa.com -d cp.aa.com
+acme.sh --issue --tls -d example.com -d www.example.com -d cp.example.com
 ```
 
 More examples: https://github.com/Neilpang/acme.sh/wiki/How-to-issue-a-cert
 
-# Use Apache mode
+# 6. Use Apache mode
 
 **(requires you be root/sudoer, since it is required to interact with apache server)**
 
@@ -195,28 +191,28 @@ Particularly, if you are running an apache server, you should use apache mode in
 Just set string "apache" as the second argument, it will force use of apache plugin automatically.
 
 ```
-acme.sh --issue --apache -d aa.com -d www.aa.com -d user.aa.com
+acme.sh --issue --apache -d example.com -d www.example.com -d user.example.com
 ```
 
 More examples: https://github.com/Neilpang/acme.sh/wiki/How-to-issue-a-cert
 
-# Use DNS mode:
+# 7. Use DNS mode:
 
 Support the `dns-01` challenge.
 
 ```bash
-acme.sh --issue --dns -d aa.com -d www.aa.com -d user.aa.com
+acme.sh --issue --dns -d example.com -d www.example.com -d user.example.com
 ```
 
 You should get the output like below:
 
 ```
 Add the following txt record:
-Domain:_acme-challenge.aa.com
+Domain:_acme-challenge.example.com
 Txt value:9ihDbjYfTExAYeDs4DBUeuTo18KBzwvTEjUnSwd32-c
 
 Add the following txt record:
-Domain:_acme-challenge.www.aa.com
+Domain:_acme-challenge.www.example.com
 Txt value:9ihDbjxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 Please add those txt records to the domains. Waiting for the dns to take effect.
@@ -226,12 +222,12 @@ Please add those txt records to the domains. Waiting for the dns to take effect.
 Then just rerun with `renew` argument:
 
 ```bash
-acme.sh --renew -d aa.com
+acme.sh --renew -d example.com
 ```
 
 Ok, it's finished.
 
-# Automatic DNS API integration
+# 8. Automatic DNS API integration
 
 If your DNS provider supports API access, we can use API to automatically issue the certs.
 
@@ -242,8 +238,11 @@ You don't have do anything manually!
 1. Cloudflare.com API
 2. Dnspod.cn API
 3. Cloudxns.com API
-4. AWS Route 53, see: https://github.com/Neilpang/acme.sh/issues/65
-5. lexicon dns api: https://github.com/Neilpang/acme.sh/wiki/How-to-use-lexicon-dns-api
+4. Godaddy.com API
+5. OVH, kimsufi, soyoustart and runabove API
+6. AWS Route 53, see: https://github.com/Neilpang/acme.sh/issues/65
+7. PowerDNS API
+8. lexicon dns api: https://github.com/Neilpang/acme.sh/wiki/How-to-use-lexicon-dns-api
    (DigitalOcean, DNSimple, DnsMadeEasy, DNSPark, EasyDNS, Namesilo, NS1, PointHQ, Rage4 and Vultr etc.)
 
 ##### More APIs are coming soon...
@@ -252,7 +251,7 @@ If your DNS provider is not on the supported list above, you can write your own 
 
 For more details: [How to use dns api](dnsapi)
 
-# Issue ECC certificate:
+# 9. Issue ECC certificate:
 
 `Let's Encrypt` now can issue **ECDSA** certificates.
 
@@ -265,13 +264,13 @@ For example:
 ### Single domain ECC cerfiticate:
 
 ```bash
-acme.sh --issue -w /home/wwwroot/aa.com -d aa.com --keylength  ec-256
+acme.sh --issue -w /home/wwwroot/example.com -d example.com --keylength  ec-256
 ```
 
 SAN multi domain ECC certificate:
 
 ```bash
-acme.sh --issue -w /home/wwwroot/aa.com -d aa.com -d www.aa.com --keylength  ec-256
+acme.sh --issue -w /home/wwwroot/example.com -d example.com -d www.example.com --keylength  ec-256
 ```
 
 Please look at the last parameter above.
@@ -281,6 +280,46 @@ Valid values are:
 1. **ec-256 (prime256v1, "ECDSA P-256")**
 2. **ec-384 (secp384r1,  "ECDSA P-384")**
 3. **ec-521 (secp521r1,  "ECDSA P-521", which is not supported by Let's Encrypt yet.)**
+
+
+# 10. How to renew the cert
+
+No, you don't need to renew the certs manually.  All the certs will be renewed automatically every **60** days.
+
+However, you can also force to renew any cert:
+
+```
+acme.sh --renew  -d  example.com --force
+```
+
+or, for ECC cert:
+```
+acme.sh --renew  -d  example.com  --force --ecc
+```
+
+# 11. How to upgrade `acme.sh`
+acme.sh is in developing, it's strongly recommended to use the latest code.
+
+You can update acme.sh to the latest code:
+```
+acme.sh --upgrade
+```
+
+You can enable auto upgrade:
+```
+acme.sh  --upgrade  --auto-upgrade
+```
+Then **acme.sh** will keep up to date automatically.
+
+Disable auto upgrade:
+```
+acme.sh  --upgrade  --auto-upgrade 0
+```
+
+# 12. Issue a cert from an existing CSR
+
+https://github.com/Neilpang/acme.sh/wiki/Issue-a-cert-from-existing-CSR
+
 
 # Under the Hood
 
@@ -293,7 +332,7 @@ TODO:
 2. ACME protocol: https://github.com/ietf-wg-acme/acme
 3. Certbot: https://github.com/certbot/certbot
 
-# License & Other
+# License & Others
 
 License is GPLv3
 
@@ -302,4 +341,8 @@ Please Star and Fork me.
 [Issues](https://github.com/Neilpang/acme.sh/issues) and [pull requests](https://github.com/Neilpang/acme.sh/pulls) are welcomed.
 
 
+# Donate
+1. PayPal:  donate@acme.sh
+
+[Donate List](https://github.com/Neilpang/acme.sh/wiki/Donate-list)
 

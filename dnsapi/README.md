@@ -15,7 +15,7 @@ export CF_Email="xxxx@sss.com"
 
 Ok, let's issue cert now:
 ```
-acme.sh   --issue   --dns dns_cf   -d aa.com  -d www.aa.com
+acme.sh   --issue   --dns dns_cf   -d example.com  -d www.example.com
 ```
 
 The `CF_Key` and `CF_Email`  will be saved in `~/.acme.sh/account.conf`, when next time you use cloudflare api, it will reuse this key.
@@ -37,7 +37,7 @@ export DP_Key="sADDsdasdgdsf"
 
 Ok, let's issue cert now:
 ```
-acme.sh   --issue   --dns dns_dp   -d aa.com  -d www.aa.com
+acme.sh   --issue   --dns dns_dp   -d example.com  -d www.example.com
 ```
 
 The `DP_Id` and `DP_Key`  will be saved in `~/.acme.sh/account.conf`, when next time you use dnspod.cn api, it will reuse this key.
@@ -58,12 +58,63 @@ export CX_Secret="sADDsdasdgdsf"
 
 Ok, let's issue cert now:
 ```
-acme.sh   --issue   --dns dns_cx   -d aa.com  -d www.aa.com
+acme.sh   --issue   --dns dns_cx   -d example.com  -d www.example.com
 ```
 
 The `CX_Key` and `CX_Secret`  will be saved in `~/.acme.sh/account.conf`, when next time you use Cloudxns.com api, it will reuse this key.
 
 
+## Use Godaddy.com domain api to automatically issue cert
+
+We support Godaddy integration.
+
+First you need to login to your Godaddy account to get your api key and api secret.
+
+https://developer.godaddy.com/keys/
+
+Please Create a Production key, instead of a Test key.
+
+
+```
+export GD_Key="sdfsdfsdfljlbjkljlkjsdfoiwje"
+
+export GD_Secret="asdfsdafdsfdsfdsfdsfdsafd"
+
+```
+
+Ok, let's issue cert now:
+```
+acme.sh   --issue   --dns dns_gd   -d example.com  -d www.example.com
+```
+
+The `GD_Key` and `GD_Secret`  will be saved in `~/.acme.sh/account.conf`, when next time you use cloudflare api, it will reuse this key.
+
+## Use PowerDNS embedded api to automatically issue cert
+
+We support PowerDNS embedded API integration.
+
+First you need to enable api and set your api-token in PowerDNS configuration.
+
+https://doc.powerdns.com/md/httpapi/README/
+
+```
+export PDNS_Url="http://ns.example.com:8081"
+export PDNS_ServerId="localhost"
+export PDNS_Token="0123456789ABCDEF"
+export PDNS_Ttl=60
+
+```
+
+Ok, let's issue cert now:
+```
+acme.sh   --issue   --dns dns_pdns   -d example.com  -d www.example.com
+```
+
+The `PDNS_Url`, `PDNS_ServerId`, `PDNS_Token` and `PDNS_Ttl` will be saved in `~/.acme.sh/account.conf`.
+
+## Use OVH/kimsufi/soyoustart/runabove API
+
+https://github.com/Neilpang/acme.sh/wiki/How-to-use-OVH-domain-api
 
 # Use custom api
 
@@ -76,12 +127,10 @@ Let's assume you want to name it 'myapi',
 3. Then you can use your api to issue cert like:
 
 ```
-acme.sh  --issue  --dns  dns_myapi  -d aa.com  -d www.aa.com
+acme.sh  --issue  --dns  dns_myapi  -d example.com  -d www.example.com
 ```
 
 For more details, please check our sample script: [dns_myapi.sh](dns_myapi.sh)
-
-
 
 # Use lexicon dns api
 
