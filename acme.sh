@@ -48,6 +48,8 @@ RENEW_SKIP=2
 ECC_SEP="_"
 ECC_SUFFIX="${ECC_SEP}ecc"
 
+# verbose by default (ie. CLI)
+QUIET="0"
 LOG_LEVEL_1=1
 LOG_LEVEL_2=2
 LOG_LEVEL_3=3
@@ -97,6 +99,9 @@ _log() {
 }
 
 _info() {
+  if [ $QUIET -eq "1" ]; then
+      return
+  fi
   _log "$@"
   _printargs "$@"
 }
