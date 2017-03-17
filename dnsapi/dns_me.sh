@@ -1,36 +1,30 @@
 #!/usr/bin/env sh
 
-#
-#CF_Key="sdfsdfsdfljlbjkljlkjsdfoiwje"
-#
-#CF_Email="xxxx@sss.com"
+# bug reports to dev@1e.ca
 
-CF_Api="https://api.cloudflare.com/client/v4"
+# ME_Key=qmlkdjflmkqdjf	
+# ME_Secret=qmsdlkqmlksdvnnpae
+
+ME_Api=https://api.dnsmadeeasy.com/V2.0/dns/managed
 
 ########  Public functions #####################
 
 #Usage: add  _acme-challenge.www.domain.com   "XKrxpRBosdIKFzxW_CT3KLZNf6q0HG9i01zxXp5CPBs"
-dns_cf_add() {
+dns_me_add() {
   fulldomain=$1
   txtvalue=$2
 
-  if [ -z "$CF_Key" ] || [ -z "$CF_Email" ]; then
-    CF_Key=""
-    CF_Email=""
-    _err "You don't specify cloudflare api key and email yet."
+  if [ -z "$ME_Key" ] || [ -z "$ME_Secret" ]; then
+    ME_Key=""
+    ME_Secret=""
+    _err "You didn't specify DNSMadeEasy api key and secret yet."
     _err "Please create you key and try again."
     return 1
   fi
 
-  if ! _contains "$CF_Email" "@"; then
-    _err "It seems that the CF_Email=$CF_Email is not a valid email address."
-    _err "Please check and retry."
-    return 1
-  fi
-
   #save the api key and email to the account conf file.
-  _saveaccountconf CF_Key "$CF_Key"
-  _saveaccountconf CF_Email "$CF_Email"
+  _saveaccountconf ME_Key "$ME_Key"
+  _saveaccountconf ME_Secret "$ME_Secret"
 
   _debug "First detect the root zone"
   if ! _get_root "$fulldomain"; then
@@ -42,20 +36,21 @@ dns_cf_add() {
   _debug _domain "$_domain"
 
   _debug "Getting txt records"
-  _cf_rest GET "zones/${_domain_id}/dns_records?type=TXT&name=$fulldomain"
+  _me_rest GET "${_domain_id}/records?recordName=$_sub_domain&type=TXT"
 
-  if ! printf "%s" "$response" | grep \"success\":true >/dev/null; then
+  if ! _contains "$response" "\"totalRecords\":"; then
     _err "Error"
     return 1
   fi
 
-  count=$(printf "%s\n" "$response" | _egrep_o "\"count\":[^,]*" | cut -d : -f 2)
+  count=$(printf "%s\n" "$response" | _egrep_o "\"totalRecords\":[^,]*" | cut -d : -f 2)
   _debug count "$count"
   if [ "$count" = "0" ]; then
     _info "Adding record"
-    if _cf_rest POST "zones/$_domain_id/dns_records" "{\"type\":\"TXT\",\"name\":\"$fulldomain\",\"content\":\"$txtvalue\",\"ttl\":120}"; then
-      if printf -- "%s" "$response" | grep "$fulldomain" >/dev/null; then
-        _info "Added, OK"
+    if _me_rest POST "$_domain_id/records/" "{\"type\":\"TXT\",\"name\":\"$_sub_domain\",\"value\":\"$txtvalue\",\"gtdLocation\":\"DEFAULT\",\"ttl\":120}"; then
+      if printf -- "%s" "$response" | grep \"id\": >/dev/null; then
+        _info "Added"
+        #todo: check if the record takes effect
         return 0
       else
         _err "Add txt record error."
@@ -65,12 +60,13 @@ dns_cf_add() {
     _err "Add txt record error."
   else
     _info "Updating record"
-    record_id=$(printf "%s\n" "$response" | _egrep_o "\"id\":\"[^\"]*\"" | cut -d : -f 2 | tr -d \" | head -n 1)
+    record_id=$(printf "%s\n" "$response" | _egrep_o "\"id\":[^,]*" | cut -d : -f 2 | head -n 1)
     _debug "record_id" "$record_id"
 
-    _cf_rest PUT "zones/$_domain_id/dns_records/$record_id" "{\"id\":\"$record_id\",\"type\":\"TXT\",\"name\":\"$fulldomain\",\"content\":\"$txtvalue\",\"zone_id\":\"$_domain_id\",\"zone_name\":\"$_domain\"}"
+    _me_rest PUT "$_domain_id/records/$record_id/" "{\"id\":\"$record_id\",\"type\":\"TXT\",\"name\":\"$_sub_domain\",\"value\":\"$txtvalue\",\"gtdLocation\":\"DEFAULT\",\"ttl\":120}"
     if [ "$?" = "0" ]; then
-      _info "Updated, OK"
+      _info "Updated"
+      #todo: check if the record takes effect
       return 0
     fi
     _err "Update error"
@@ -79,8 +75,8 @@ dns_cf_add() {
 
 }
 
-#fulldomain txtvalue
-dns_cf_rm() {
+#fulldomain
+dns_me_rm() {
   fulldomain=$1
   txtvalue=$2
   _debug "First detect the root zone"
@@ -93,31 +89,25 @@ dns_cf_rm() {
   _debug _domain "$_domain"
 
   _debug "Getting txt records"
-  _cf_rest GET "zones/${_domain_id}/dns_records?type=TXT&name=$fulldomain&content=$txtvalue"
+  _me_rest GET "${_domain_id}/records?recordName=$_sub_domain&type=TXT"
 
-  if ! printf "%s" "$response" | grep \"success\":true >/dev/null; then
-    _err "Error"
-    return 1
-  fi
-
-  count=$(printf "%s\n" "$response" | _egrep_o "\"count\":[^,]*" | cut -d : -f 2)
+  count=$(printf "%s\n" "$response" | _egrep_o "\"totalRecords\":[^,]*" | cut -d : -f 2)
   _debug count "$count"
   if [ "$count" = "0" ]; then
     _info "Don't need to remove."
   else
-    record_id=$(printf "%s\n" "$response" | _egrep_o "\"id\":\"[^\"]*\"" | cut -d : -f 2 | tr -d \" | head -n 1)
+    record_id=$(printf "%s\n" "$response" | _egrep_o "\"id\":[^,]*" | cut -d : -f 2 | head -n 1)
     _debug "record_id" "$record_id"
     if [ -z "$record_id" ]; then
       _err "Can not get record id to remove."
       return 1
     fi
-    if ! _cf_rest DELETE "zones/$_domain_id/dns_records/$record_id"; then
+    if ! _me_rest DELETE "$_domain_id/records/$record_id"; then
       _err "Delete record error."
       return 1
     fi
-    _contains "$response" '"success":true'
+    _contains "$response" ''
   fi
-
 }
 
 ####################  Private functions below ##################################
@@ -132,21 +122,20 @@ _get_root() {
   p=1
   while true; do
     h=$(printf "%s" "$domain" | cut -d . -f $i-100)
-    _debug h "$h"
     if [ -z "$h" ]; then
       #not valid
       return 1
     fi
 
-    if ! _cf_rest GET "zones?name=$h"; then
+    if ! _me_rest GET "name?domainname=$h"; then
       return 1
     fi
 
-    if _contains "$response" "\"name\":\"$h\"" >/dev/null; then
-      _domain_id=$(printf "%s\n" "$response" | _egrep_o "\[.\"id\":\"[^\"]*\"" | head -n 1 | cut -d : -f 2 | tr -d \")
+    if _contains "$response" "\"name\":\"$h\""; then
+      _domain_id=$(printf "%s\n" "$response" | _egrep_o "\"id\":[^,]*" | head -n 1 | cut -d : -f 2 | tr -d '}')
       if [ "$_domain_id" ]; then
         _sub_domain=$(printf "%s" "$domain" | cut -d . -f 1-$p)
-        _domain=$h
+        _domain="$h"
         return 0
       fi
       return 1
@@ -157,21 +146,24 @@ _get_root() {
   return 1
 }
 
-_cf_rest() {
+_me_rest() {
   m=$1
   ep="$2"
   data="$3"
   _debug "$ep"
 
-  export _H1="X-Auth-Email: $CF_Email"
-  export _H2="X-Auth-Key: $CF_Key"
-  export _H3="Content-Type: application/json"
+  cdate=$(date -u +"%a, %d %b %Y %T %Z")
+  hmac=$(printf "%s" "$cdate" | _hmac sha1 "$(printf "%s" "$ME_Secret" | _hex_dump | tr -d " ")" hex)
+
+  export _H1="x-dnsme-apiKey: $ME_Key"
+  export _H2="x-dnsme-requestDate: $cdate"
+  export _H3="x-dnsme-hmac: $hmac"
 
   if [ "$m" != "GET" ]; then
     _debug data "$data"
-    response="$(_post "$data" "$CF_Api/$ep" "" "$m")"
+    response="$(_post "$data" "$ME_Api/$ep" "" "$m")"
   else
-    response="$(_get "$CF_Api/$ep")"
+    response="$(_get "$ME_Api/$ep")"
   fi
 
   if [ "$?" != "0" ]; then
