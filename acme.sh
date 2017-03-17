@@ -1875,7 +1875,7 @@ _startserver() {
   _debug Le_HTTPPort "$Le_HTTPPort"
   _debug Le_Listen_V4 "$Le_Listen_V4"
   _debug Le_Listen_V6 "$Le_Listen_V6"
-  _NC="nc"
+  _NC="timeout 60 nc"
 
   if [ "$Le_Listen_V4" ]; then
     _NC="$_NC -4"
