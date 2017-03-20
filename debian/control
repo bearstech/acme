@@ -1,4 +1,4 @@
-Source: acme.sh
+Source: acme
 Section: unknown
 Priority: optional
 Maintainer: Lucas Bonnet <lbonnet@bearstech.com>
@@ -6,7 +6,7 @@ Build-Depends: debhelper (>=9)
 Standards-Version: 3.9.6
 Homepage: https://github.com/bearstech/acme.sh
 
-Package: acme.sh
+Package: acme
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, openssl
 Description: Let's Encrypt bash client
