@@ -3841,6 +3841,10 @@ issue() {
         cat "$CA_CERT_PATH" >>"$CERT_FULLCHAIN_PATH"
         _info "And the full chain certs is there: $(__green " $CERT_FULLCHAIN_PATH ")"
 
+        # concatenate key cert and chain into a single PEM file for haproxy
+        cat "$CERT_KEY_PATH" "$CA_CERT_PATH" "$CERT_FULLCHAIN_PATH" > "$DOMAIN_PATH/$domain.pem"
+        _info "Key + Cert + Chain PEM is there: $(__green " $DOMAIN_PATH/$domain.pem ")"
+
         rm -f "$CA_CERT_PATH.der"
         break
       fi
