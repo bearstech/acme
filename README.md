@@ -1,4 +1,6 @@
 # An ACME Shell script: acme.sh [![Build Status](https://travis-ci.org/Neilpang/acme.sh.svg?branch=master)](https://travis-ci.org/Neilpang/acme.sh)
+
+[![Join the chat at https://gitter.im/acme-sh/Lobby](https://badges.gitter.im/acme-sh/Lobby.svg)](https://gitter.im/acme-sh/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 - An ACME protocol client written purely in Shell (Unix shell) language.
 - Full ACME protocol implementation.
 - Simple, powerful and very easy to use. You only need 3 minutes to learn it.
@@ -7,11 +9,14 @@
 - Purely written in Shell with no dependencies on python or the official Let's Encrypt client.
 - Just one script to issue, renew and install your certificates automatically.
 - DOES NOT require `root/sudoer` access.
+- Docker friendly
+- IPv6 support
 
-It's probably the `easiest&smallest&smartest` shell script to automatically issue & renew the free certificates from Let's Encrypt.
+It's probably the `easiest & smartest` shell script to automatically issue & renew the free certificates from Let's Encrypt.
 
 Wiki: https://github.com/Neilpang/acme.sh/wiki
 
+For Docker Fans: [acme.sh :two_hearts: Docker ](https://github.com/Neilpang/acme.sh/wiki/Run-acme.sh-in-docker)
 
 Twitter: [@neilpangxa](https://twitter.com/neilpangxa)
 
@@ -29,6 +34,7 @@ Twitter: [@neilpangxa](https://twitter.com/neilpangxa)
 - [Centminmod](http://centminmod.com/letsencrypt-acmetool-https.html)
 - [splynx](https://forum.splynx.com/t/free-ssl-cert-for-splynx-lets-encrypt/297)
 - [archlinux](https://aur.archlinux.org/packages/acme.sh-git/)
+- [opnsense.org](https://github.com/opnsense/plugins/tree/master/security/acme-client/src/opnsense/scripts/OPNsense/AcmeClient)
 - [more...](https://github.com/Neilpang/acme.sh/wiki/Blogs-and-tutorials)
 
 # Tested OS
@@ -56,7 +62,7 @@ Twitter: [@neilpangxa](https://twitter.com/neilpangxa)
 |19|[![](https://cdn.rawgit.com/Neilpang/acmetest/master/status/gentoo-stage3-amd64.svg)](https://github.com/Neilpang/letest#here-are-the-latest-status)|Gentoo Linux
 |20|[![Build Status](https://travis-ci.org/Neilpang/acme.sh.svg?branch=master)](https://travis-ci.org/Neilpang/acme.sh)|Mac OSX
 
-For all build statuses, check our [daily build project](https://github.com/Neilpang/acmetest):
+For all build statuses, check our [weekly build project](https://github.com/Neilpang/acmetest):
 
 https://github.com/Neilpang/acmetest
 
@@ -133,13 +139,25 @@ root@v1:~# acme.sh -h
 acme.sh --issue -d example.com -w /home/wwwroot/example.com
 ```
 
+or:
+
+```bash
+acme.sh --issue -d example.com -w /home/username/public_html
+```
+
+or:
+
+```bash
+acme.sh --issue -d example.com -w /var/www/html
+```
+
 **Example 2:** Multiple domains in the same cert.
 
 ```bash
 acme.sh --issue -d example.com -d www.example.com -d cp.example.com -w /home/wwwroot/example.com
 ```
 
-The parameter `/home/wwwroot/example.com` is the web root folder. You **MUST** have `write access` to this folder.
+The parameter `/home/wwwroot/example.com` or `/home/username/public_html` or `/var/www/html` is the web root folder where you host your website files. You **MUST** have `write access` to this folder.
 
 Second argument **"example.com"** is the main domain you want to issue the cert for.
 You must have at least one domain there.
@@ -161,17 +179,17 @@ You **MUST** use this command to copy the certs to the target files, **DO NOT** 
 **Apache** example:
 ```bash
 acme.sh --install-cert -d example.com \
---certpath      /path/to/certfile/in/apache/cert.pem  \
---keypath       /path/to/keyfile/in/apache/key.pem  \
---fullchainpath /path/to/fullchain/certfile/apache/fullchain.pem \
+--cert-file      /path/to/certfile/in/apache/cert.pem  \
+--key-file       /path/to/keyfile/in/apache/key.pem  \
+--fullchain-file /path/to/fullchain/certfile/apache/fullchain.pem \
 --reloadcmd     "service apache2 force-reload"
 ```
 
 **Nginx** example:
 ```bash
 acme.sh --install-cert -d example.com \
---keypath       /path/to/keyfile/in/nginx/key.pem  \
---fullchainpath /path/to/fullchain/nginx/cert.pem \
+--key-file       /path/to/keyfile/in/nginx/key.pem  \
+--fullchain-file /path/to/fullchain/nginx/cert.pem \
 --reloadcmd     "service nginx force-reload"
 ```
 
@@ -181,7 +199,7 @@ The ownership and permission info of existing files are preserved. You may want 
 
 Install/copy the issued cert/key to the production Apache or Nginx path.
 
-The cert will be `renewed every **60** days by default` (which is configurable). Once the cert is renewed, the Apache/Nginx service will be restarted automatically by the command: `service apache2 restart` or `service nginx restart`.
+The cert will be renewed every **60** days by default (which is configurable). Once the cert is renewed, the Apache/Nginx service will be reloaded automatically by the command: `service apache2 force-reload` or `service nginx force-reload`.
 
 
 # 4. Use Standalone server to issue cert
@@ -278,6 +296,9 @@ acme.sh --renew -d example.com
 
 Ok, it's finished.
 
+**Take care, this is dns manual mode, it can not be renewed automatically. you will have to add a new txt record to your domain by your hand when you renew your cert.**
+
+**Please use dns api mode instead.**
 
 # 9. Automatic DNS API integration
 
@@ -291,14 +312,12 @@ You don't have to do anything manually!
 1. DNSPod.cn API
 1. CloudXNS.com API
 1. GoDaddy.com API
-1. OVH, kimsufi, soyoustart and runabove API
-1. AWS Route 53
 1. PowerDNS.com API
-1. lexicon DNS API: https://github.com/Neilpang/acme.sh/wiki/How-to-use-lexicon-dns-api
-   (DigitalOcean, DNSimple, DNSMadeEasy, DNSPark, EasyDNS, Namesilo, NS1, PointHQ, Rage4 and Vultr etc.)
+1. OVH, kimsufi, soyoustart and runabove API
+1. nsupdate API
 1. LuaDNS.com API
 1. DNSMadeEasy.com API
-1. nsupdate API
+1. AWS Route 53
 1. aliyun.com(阿里云) API
 1. ISPConfig 3.1 API
 1. Alwaysdata.com API
@@ -310,7 +329,21 @@ You don't have to do anything manually!
 1. Knot DNS API
 1. DigitalOcean API (native)
 1. ClouDNS.net API
+1. Infoblox NIOS API (https://www.infoblox.com/)
+1. VSCALE (https://vscale.io/)
+1. Dynu API (https://www.dynu.com)
+1. DNSimple API
+1. NS1.com API
 
+
+
+And: 
+
+1. lexicon DNS API: https://github.com/Neilpang/acme.sh/wiki/How-to-use-lexicon-dns-api
+   (DigitalOcean, DNSimple, DNSMadeEasy, DNSPark, EasyDNS, Namesilo, NS1, PointHQ, Rage4 and Vultr etc.)
+
+
+   
 **More APIs coming soon...**
 
 If your DNS provider is not on the supported list above, you can write your own DNS API script easily. If you do, please consider submitting a [Pull Request](https://github.com/Neilpang/acme.sh/pulls) and contribute it to the project.
@@ -328,7 +361,7 @@ Just set the `length` parameter with a prefix `ec-`.
 
 For example:
 
-### Single domain ECC cerfiticate
+### Single domain ECC certificate
 
 ```bash
 acme.sh --issue -w /home/wwwroot/example.com -d example.com --keylength ec-256
