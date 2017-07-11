@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VER=2.7.3
+VER=2.7.4
 
 PROJECT_NAME="acme.sh"
 
@@ -3914,9 +3914,12 @@ issue() {
         cat "$CA_CERT_PATH" >>"$CERT_FULLCHAIN_PATH"
         _info "And the full chain certs is there: $(__green " $CERT_FULLCHAIN_PATH ")"
 
+        # concatenate cert and chain into a single PEM file for nginx
+        cat "$CERT_PATH" "$CERT_FULLCHAIN_PATH" > "$DOMAIN_PATH/$domain-cert+chain.pem"
+        _info "Cert + Chain (for nginx) PEM is there: $(__green " $DOMAIN_PATH/$domain-cert+chain.pem ")"
         # concatenate key cert and chain into a single PEM file for haproxy
         cat "$CERT_KEY_PATH" "$CERT_PATH" "$CERT_FULLCHAIN_PATH" > "$DOMAIN_PATH/$domain.pem"
-        _info "Key + Cert + Chain PEM is there: $(__green " $DOMAIN_PATH/$domain.pem ")"
+        _info "Key + Cert + Chain (for haproxy) PEM is there: $(__green " $DOMAIN_PATH/$domain.pem ")"
 
         rm -f "$CA_CERT_PATH.der"
         break

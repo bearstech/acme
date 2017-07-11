@@ -1,3 +1,9 @@
+acme (2.7.4-1) UNRELEASED; urgency=medium
+
+  * add nginx-style PEM generation (cert+chain, separate key)
+
+ -- Lucas BONNET <lbonnet@bearstech.com>  Wed, 28 Jun 2017 17:42:42 +0100
+
 acme (2.7.3-1) UNRELEASED; urgency=medium
 
   * fix single-file PEM generation for haproxy
