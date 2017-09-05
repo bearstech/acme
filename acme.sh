@@ -3830,7 +3830,8 @@ issue() {
 
     echo "$END_CERT" >>"$CERT_PATH"
     _info "$(__green "Cert success.")"
-    cat "$CERT_PATH"
+    # do not output the certificate on the standard output
+    #cat "$CERT_PATH"
 
     _info "Your cert is in $(__green " $CERT_PATH ")"
 
