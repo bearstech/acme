@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VER=2.7.4
+VER=2.7.4.1
 
 PROJECT_NAME="acme.sh"
 

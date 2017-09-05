@@ -1,4 +1,4 @@
-acme (2.7.4-1) UNRELEASED; urgency=medium
+acme (2.7.4.1-1) UNRELEASED; urgency=medium
 
   * Merge upstream 2.7.4 branch
   * Do not print the certificate on stdout
