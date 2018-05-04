@@ -4212,6 +4212,14 @@ $_authorizations_map"
   [ -f "$CA_CERT_PATH" ] && _info "The intermediate CA cert is in $(__green " $CA_CERT_PATH ")"
   [ -f "$CERT_FULLCHAIN_PATH" ] && _info "And the full chain certs is there: $(__green " $CERT_FULLCHAIN_PATH ")"
 
+  # concatenate cert and chain into a single PEM file for nginx
+  cat "$CERT_PATH" "$CA_CERT_PATH" > "$DOMAIN_PATH/$domain-cert+chain.pem"
+  _info "Cert + Chain (for nginx) PEM is there: $(__green " $DOMAIN_PATH/$domain-cert+chain.pem ")"
+
+  # concatenate key, cert and chain into a single PEM file for haproxy
+  cat "$CERT_KEY_PATH" "$CERT_PATH" "$CERT_CERT_PATH" > "$DOMAIN_PATH/$domain.pem"
+  _info "Key + Cert + Chain (for haproxy) PEM is there: $(__green " $DOMAIN_PATH/$domain.pem ")"
+
   Le_CertCreateTime=$(_time)
   _savedomainconf "Le_CertCreateTime" "$Le_CertCreateTime"
 
