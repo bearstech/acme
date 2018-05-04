@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VER=2.7.8.2
+VER=2.7.8.3
 
 PROJECT_NAME="acme.sh"
 
@@ -4217,7 +4217,7 @@ $_authorizations_map"
   _info "Cert + Chain (for nginx) PEM is there: $(__green " $DOMAIN_PATH/$domain-cert+chain.pem ")"
 
   # concatenate key, cert and chain into a single PEM file for haproxy
-  cat "$CERT_KEY_PATH" "$CERT_PATH" "$CERT_CERT_PATH" > "$DOMAIN_PATH/$domain.pem"
+  cat "$CERT_KEY_PATH" "$CERT_PATH" "$CA_CERT_PATH" > "$DOMAIN_PATH/$domain.pem"
   _info "Key + Cert + Chain (for haproxy) PEM is there: $(__green " $DOMAIN_PATH/$domain.pem ")"
 
   Le_CertCreateTime=$(_time)
