@@ -1,14 +1,14 @@
-Description: Fix dnsapi searchpath (+lower DNS timeout)
+Description: Set dnsapi and deploy base folder as /usr/share/acme
  TODO: Put a short summary on the line above and replace this paragraph
  with a longer explanation of this change. Complete the meta-information
  with other relevant fields (see below for details). To make it easier, the
  information below has been extracted from the changelog. Adjust it or drop
  it.
  .
- acme (2.7.8.4-1~jessie+bearstech3) jessie-bearstech; urgency=medium
+ acme (2.7.9-1~jessie+bearstech1) jessie-bearstech; urgency=medium
  .
-   * Fixed dnsapi search path; reduced DNS wait from 120 to 5s (works for new RRs)
-Author: Vincent CARON <vcaron@bearstech.com>
+   * Updated wrt. upstream' 2.7.9 branch (not yet released), fixes ACME v2 account creation
+Author: Lucas BONNET <lbonnet@bearstech.com>
 
 ---
 The information above should follow the Patch Tagging Guidelines, please
@@ -23,24 +23,13 @@ Forwarded: <no|not-needed|url proving that it has been forwarded>
 Reviewed-By: <name and email of someone who approved the patch>
 Last-Update: <YYYY-MM-DD>
 
---- acme-2.7.8.4.orig/acme.sh
-+++ acme-2.7.8.4/acme.sh
-@@ -11,7 +11,8 @@ PROJECT="https://github.com/Neilpang/$PR
+--- acme-2.7.9.orig/acme.sh
++++ acme-2.7.9/acme.sh
+@@ -11,6 +11,7 @@ PROJECT="https://github.com/Neilpang/$PR
  DEFAULT_INSTALL_HOME="$HOME/.$PROJECT_NAME"
  _SCRIPT_="$0"
  
--_SUB_FOLDERS="/usr/share/acme/dnsapi /usr/share/acme/deploy"
 +_SCRIPT_HOME="/usr/share/acme"
-+_SUB_FOLDERS="dnsapi deploy"
+ _SUB_FOLDERS="dnsapi deploy"
  
  LETSENCRYPT_CA_V1="https://acme-v01.api.letsencrypt.org/directory"
- LETSENCRYPT_STAGING_CA_V1="https://acme-staging.api.letsencrypt.org/directory"
-@@ -42,7 +43,7 @@ LOCAL_ANY_ADDRESS="0.0.0.0"
- 
- MAX_RENEW=60
- 
--DEFAULT_DNS_SLEEP=120
-+DEFAULT_DNS_SLEEP=5
- 
- NO_VALUE="no"
- 

@@ -1,2 +1,3 @@
-usr_share
-dnsapi_search_path
+haproxy_pem
+script_home
+dns_sleep
