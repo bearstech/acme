@@ -11,7 +11,8 @@ PROJECT="https://github.com/Neilpang/$PROJECT_NAME"
 DEFAULT_INSTALL_HOME="$HOME/.$PROJECT_NAME"
 _SCRIPT_="$0"
 
-_SUB_FOLDERS="/usr/share/acme/dnsapi /usr/share/acme/deploy"
+_SCRIPT_HOME="/usr/share/acme"
+_SUB_FOLDERS="dnsapi deploy"
 
 LETSENCRYPT_CA_V1="https://acme-v01.api.letsencrypt.org/directory"
 LETSENCRYPT_STAGING_CA_V1="https://acme-staging.api.letsencrypt.org/directory"
@@ -42,7 +43,7 @@ LOCAL_ANY_ADDRESS="0.0.0.0"
 
 MAX_RENEW=60
 
-DEFAULT_DNS_SLEEP=120
+DEFAULT_DNS_SLEEP=5
 
 NO_VALUE="no"
 

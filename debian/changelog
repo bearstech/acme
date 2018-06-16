@@ -1,3 +1,9 @@
+acme (2.7.8.4-1~jessie+bearstech3) jessie-bearstech; urgency=medium
+
+  * Fixed dnsapi search path; reduced DNS wait from 120 to 5s (works for new RRs)
+
+ -- Vincent CARON <vcaron@bearstech.com>  Sat, 16 Jun 2018 18:38:52 +0200
+
 acme (2.7.8.4-1~jessie+bearstech2) jessie-bearstech; urgency=medium
 
   * Added dnsapi and dnsdeploy folders in package
