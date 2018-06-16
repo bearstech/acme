@@ -1,1 +1,3 @@
-acme.sh usr/bin
+acme.sh  usr/bin
+deploy/* usr/share/acme/deploy
+dnsapi/* usr/share/acme/dnsapi
