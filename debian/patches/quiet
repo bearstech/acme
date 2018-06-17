@@ -1,0 +1,69 @@
+Description: add --quiet support for silent cronjobs
+ TODO: Put a short summary on the line above and replace this paragraph
+ with a longer explanation of this change. Complete the meta-information
+ with other relevant fields (see below for details). To make it easier, the
+ information below has been extracted from the changelog. Adjust it or drop
+ it.
+ .
+ acme (2.7.9-1~jessie+bearstech2) jessie-bearstech; urgency=medium
+ .
+   * Re-added --quiet support
+Author: Vincent CARON <vcaron@bearstech.com>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: https://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: <YYYY-MM-DD>
+
+--- acme-2.7.9.orig/acme.sh
++++ acme-2.7.9/acme.sh
+@@ -71,6 +71,8 @@ RENEW_SKIP=2
+ ECC_SEP="_"
+ ECC_SUFFIX="${ECC_SEP}ecc"
+ 
++# [Bearstech] --quiet option
++QUIET=0
+ LOG_LEVEL_1=1
+ LOG_LEVEL_2=2
+ LOG_LEVEL_3=3
+@@ -210,6 +212,9 @@ _log() {
+ }
+ 
+ _info() {
++  if [ $QUIET -eq "1" ]; then
++      return
++  fi
+   _log "$@"
+   if [ "${SYS_LOG:-$SYSLOG_LEVEL_NONE}" -ge "$SYSLOG_LEVEL_INFO" ]; then
+     _syslog "$SYSLOG_INFO" "$@"
+@@ -5466,6 +5471,7 @@ Parameters:
+   --force, -f                       Used to force to install or force to renew a cert immediately.
+   --staging, --test                 Use staging server, just for test.
+   --debug                           Output debug info.
++  --quiet                           Only output errors.
+   --output-insecure                 Output all the sensitive messages. By default all the credentials/sensitive messages are hidden from the output/debug/log for secure.
+   --webroot, -w  /path/to/webroot   Specifies the web root folder for web root mode.
+   --standalone                      Use standalone mode.
+@@ -5793,6 +5799,14 @@ _process() {
+           shift
+         fi
+         ;;
++      --quiet)
++        if [ -z "$2" ] || _startswith "$2" "-" ; then
++          QUIET="1"
++        else
++          QUIET="$2"
++          shift
++        fi
++        ;;
+       --output-insecure)
+         export OUTPUT_INSECURE=1
+         ;;

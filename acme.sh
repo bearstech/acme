@@ -71,6 +71,8 @@ RENEW_SKIP=2
 ECC_SEP="_"
 ECC_SUFFIX="${ECC_SEP}ecc"
 
+# [Bearstech] --quiet option
+QUIET=0
 LOG_LEVEL_1=1
 LOG_LEVEL_2=2
 LOG_LEVEL_3=3
@@ -210,6 +212,9 @@ _log() {
 }
 
 _info() {
+  if [ $QUIET -eq "1" ]; then
+      return
+  fi
   _log "$@"
   if [ "${SYS_LOG:-$SYSLOG_LEVEL_NONE}" -ge "$SYSLOG_LEVEL_INFO" ]; then
     _syslog "$SYSLOG_INFO" "$@"
@@ -5466,6 +5471,7 @@ Parameters:
   --force, -f                       Used to force to install or force to renew a cert immediately.
   --staging, --test                 Use staging server, just for test.
   --debug                           Output debug info.
+  --quiet                           Only output errors.
   --output-insecure                 Output all the sensitive messages. By default all the credentials/sensitive messages are hidden from the output/debug/log for secure.
   --webroot, -w  /path/to/webroot   Specifies the web root folder for web root mode.
   --standalone                      Use standalone mode.
@@ -5790,6 +5796,14 @@ _process() {
           DEBUG="$DEBUG_LEVEL_DEFAULT"
         else
           DEBUG="$2"
+          shift
+        fi
+        ;;
+      --quiet)
+        if [ -z "$2" ] || _startswith "$2" "-" ; then
+          QUIET="1"
+        else
+          QUIET="$2"
           shift
         fi
         ;;

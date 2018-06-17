@@ -1,3 +1,9 @@
+acme (2.7.9-1~wheezy+bearstech2) wheezy-bearstech; urgency=medium
+
+  * Re-added --quiet support 
+
+ -- Vincent CARON <vcaron@bearstech.com>  Sun, 17 Jun 2018 20:18:05 +0200
+
 acme (2.7.8.4-1~jessie+bearstech3) jessie-bearstech; urgency=medium
 
   * Fixed dnsapi search path; reduced DNS wait from 120 to 5s (works for new RRs)
