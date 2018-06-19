@@ -2215,6 +2215,10 @@ __initHome() {
   #    fi
   #  fi
 
+  if [ -z "$ACME_DIR" ] ; then
+    ACME_DIR="/etc/acme"
+  fi
+  
   if [ -z "$LE_WORKING_DIR" ]; then
     _debug "Using default home:$DEFAULT_INSTALL_HOME"
     LE_WORKING_DIR="$DEFAULT_INSTALL_HOME"

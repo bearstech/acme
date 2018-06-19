@@ -2,3 +2,4 @@ haproxy_pem
 script_home
 dns_sleep
 quiet
+acme_dir_etc
