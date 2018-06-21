@@ -23,18 +23,18 @@ Forwarded: <no|not-needed|url proving that it has been forwarded>
 Reviewed-By: <name and email of someone who approved the patch>
 Last-Update: <YYYY-MM-DD>
 
---- acme-2.7.9.orig/acme.sh
-+++ acme-2.7.9/acme.sh
-@@ -71,6 +71,8 @@ RENEW_SKIP=2
+--- a/acme.sh
++++ b/acme.sh
+@@ -71,6 +71,8 @@
  ECC_SEP="_"
  ECC_SUFFIX="${ECC_SEP}ecc"
  
 +# [Bearstech] --quiet option
-+QUIET=0
++QUIET="0"
  LOG_LEVEL_1=1
  LOG_LEVEL_2=2
  LOG_LEVEL_3=3
-@@ -210,6 +212,9 @@ _log() {
+@@ -210,6 +212,9 @@
  }
  
  _info() {
@@ -44,7 +44,7 @@ Last-Update: <YYYY-MM-DD>
    _log "$@"
    if [ "${SYS_LOG:-$SYSLOG_LEVEL_NONE}" -ge "$SYSLOG_LEVEL_INFO" ]; then
      _syslog "$SYSLOG_INFO" "$@"
-@@ -5466,6 +5471,7 @@ Parameters:
+@@ -5466,6 +5471,7 @@
    --force, -f                       Used to force to install or force to renew a cert immediately.
    --staging, --test                 Use staging server, just for test.
    --debug                           Output debug info.
@@ -52,7 +52,7 @@ Last-Update: <YYYY-MM-DD>
    --output-insecure                 Output all the sensitive messages. By default all the credentials/sensitive messages are hidden from the output/debug/log for secure.
    --webroot, -w  /path/to/webroot   Specifies the web root folder for web root mode.
    --standalone                      Use standalone mode.
-@@ -5793,6 +5799,14 @@ _process() {
+@@ -5793,6 +5799,14 @@
            shift
          fi
          ;;

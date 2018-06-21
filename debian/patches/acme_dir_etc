@@ -23,16 +23,22 @@ Forwarded: <no|not-needed|url proving that it has been forwarded>
 Reviewed-By: <name and email of someone who approved the patch>
 Last-Update: <YYYY-MM-DD>
 
---- acme-2.7.9.orig/acme.sh
-+++ acme-2.7.9/acme.sh
-@@ -2215,6 +2215,10 @@ __initHome() {
+--- a/acme.sh
++++ b/acme.sh
+@@ -2215,9 +2215,13 @@
    #    fi
    #  fi
  
+-  if [ -z "$LE_WORKING_DIR" ]; then
+-    _debug "Using default home:$DEFAULT_INSTALL_HOME"
+-    LE_WORKING_DIR="$DEFAULT_INSTALL_HOME"
 +  if [ -z "$ACME_DIR" ] ; then
 +    ACME_DIR="/etc/acme"
 +  fi
-+  
-   if [ -z "$LE_WORKING_DIR" ]; then
-     _debug "Using default home:$DEFAULT_INSTALL_HOME"
-     LE_WORKING_DIR="$DEFAULT_INSTALL_HOME"
++
++  # [Bearstech] Use $ACME_DIR as working directory
++  if [ -z "$LE_WORKING_DIR" ] ; then
++    LE_WORKING_DIR=$ACME_DIR
+   fi
+   export LE_WORKING_DIR
+ 

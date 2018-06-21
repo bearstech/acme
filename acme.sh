@@ -72,7 +72,7 @@ ECC_SEP="_"
 ECC_SUFFIX="${ECC_SEP}ecc"
 
 # [Bearstech] --quiet option
-QUIET=0
+QUIET="0"
 LOG_LEVEL_1=1
 LOG_LEVEL_2=2
 LOG_LEVEL_3=3
@@ -2218,10 +2218,10 @@ __initHome() {
   if [ -z "$ACME_DIR" ] ; then
     ACME_DIR="/etc/acme"
   fi
-  
-  if [ -z "$LE_WORKING_DIR" ]; then
-    _debug "Using default home:$DEFAULT_INSTALL_HOME"
-    LE_WORKING_DIR="$DEFAULT_INSTALL_HOME"
+
+  # [Bearstech] Use $ACME_DIR as working directory
+  if [ -z "$LE_WORKING_DIR" ] ; then
+    LE_WORKING_DIR=$ACME_DIR
   fi
   export LE_WORKING_DIR
 
@@ -4180,7 +4180,8 @@ $_authorizations_map"
 
   if [ "$Le_LinkCert" ]; then
     _info "$(__green "Cert success.")"
-    cat "$CERT_PATH"
+    # [Bearstech] do not output the certificate on the standard output
+    #cat "$CERT_PATH"
 
     _info "Your cert is in $(__green " $CERT_PATH ")"
 

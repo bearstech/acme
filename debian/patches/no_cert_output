@@ -1,0 +1,12 @@
+--- a/acme.sh
++++ b/acme.sh
+@@ -4180,7 +4180,8 @@
+ 
+   if [ "$Le_LinkCert" ]; then
+     _info "$(__green "Cert success.")"
+-    cat "$CERT_PATH"
++    # [Bearstech] do not output the certificate on the standard output
++    #cat "$CERT_PATH"
+ 
+     _info "Your cert is in $(__green " $CERT_PATH ")"
+ 
