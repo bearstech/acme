@@ -1,0 +1,27 @@
+#!/bin/bash
+
+force="$1"
+
+acme_home="/etc/acme"
+acme_opts="--cron --home $acme_home $force" # --quiet
+
+now=$(date -u "+%s")
+
+cd "$acme_home"
+
+for d in * ; do
+  if [ -f "$d"/"$d.conf" ]; then
+    # acme config file for domain $d
+    conf="$d"/"$d.conf"
+    eval $(grep '^Le_NextRenewTime *=' $conf)
+
+    if [ "$force" == "--force" ] || [ "$now" -gt "$Le_NextRenewTime" ];then
+      # at least one domain needs renewing, we can call acme here and
+      # stop looking for other domains, acme will take care of them
+      service apache2 stop
+      /usr/bin/acme.sh $acme_opts
+      service apache2 start
+      exit 0
+    fi
+  fi
+done
