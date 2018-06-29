@@ -1,3 +1,9 @@
+acme (2.7.9-2~stretch+bearstech2) stretch-bearstech; urgency=medium
+
+  * Add socat dependency for standalone mode
+
+ -- Lucas BONNET <lbonnet@bearstech.com>  Fri, 29 Jun 2018 09:52:42 +0200
+
 acme (2.7.9-2~stretch+bearstech1) stretch-bearstech; urgency=medium
 
   * Fix Patches

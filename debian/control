@@ -8,6 +8,6 @@ Homepage: https://github.com/bearstech/acme.sh
 
 Package: acme
 Architecture: any
-Depends: ${shlibs:Depends}, ${misc:Depends}, openssl, dnsutils
+Depends: ${shlibs:Depends}, ${misc:Depends}, openssl, dnsutils, socat
 Description: Let's Encrypt bash client
  Let's Encrypt bash client
