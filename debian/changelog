@@ -1,4 +1,4 @@
-acmesh (2.8.3-3~buster+bearstech1) buster-bearstech; urgency=medium
+acmesh (2.8.3-7~buster+bearstech1) buster-bearstech; urgency=medium
 
   * Rename package to acmesh to avoid conflict with upstream "acme" package.
 

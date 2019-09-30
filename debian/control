@@ -7,8 +7,8 @@ Standards-Version: 3.9.6
 Homepage: https://github.com/bearstech/acme.sh
 
 Package: acmesh
-Replaces: acme (<< 2.8.3-1~)
-Breaks: acme (<< 2.8.3-1~)
+Replaces: acme
+Breaks: acme
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, openssl, dnsutils, socat
 Description: Let's Encrypt bash client
