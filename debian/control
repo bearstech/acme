@@ -1,4 +1,4 @@
-Source: acme
+Source: acmesh
 Section: unknown
 Priority: optional
 Maintainer: Lucas Bonnet <lbonnet@bearstech.com>
@@ -6,8 +6,16 @@ Build-Depends: debhelper (>=9)
 Standards-Version: 3.9.6
 Homepage: https://github.com/bearstech/acme.sh
 
-Package: acme
+Package: acmesh
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}, openssl, dnsutils, socat
 Description: Let's Encrypt bash client
  Let's Encrypt bash client
+
+Package: acme
+Depends: acmesh, ${misc:Depends}
+Architecture: all
+Priority: optional
+Section: oldlibs
+Description: transitional package
+ This is a transitional package. It can safely be removed.
