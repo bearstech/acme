@@ -1,4 +1,4 @@
-acme (2.8.3~stretch+bearstech1) stretch-bearstech; urgency=medium
+acme (2.8.3-1~stretch+bearstech1) stretch-bearstech; urgency=medium
 
   * Upgrade to upstream 2.8.3, see https://trac.bearstech.com/trac/ticket/7073
 
