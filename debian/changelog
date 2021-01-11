@@ -1,3 +1,9 @@
+acmesh (2.8.9-1~buster+bearstech1) buster-bearstech; urgency=medium
+
+  * Upgrade to upstream 2.8.9-master.
+
+ -- Lucas BONNET <lbonnet@bearstech.com>  Mon, 11 Jan 2021 14:48:42 +0100
+
 acmesh (2.8.3-7~buster+bearstech1) buster-bearstech; urgency=medium
 
   * Rename package to acmesh to avoid conflict with upstream "acme" package.
