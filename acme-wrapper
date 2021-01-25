@@ -1,6 +1,7 @@
 #!/bin/bash
 
 force="$1"
+WEB_SERVER="${WEB_SERVER:-apache2}"
 
 acme_home="/etc/acme"
 acme_opts="--cron --home $acme_home $force" # --quiet
@@ -18,9 +19,9 @@ for d in * ; do
     if [ "$force" == "--force" ] || [ "$now" -gt "$Le_NextRenewTime" ];then
       # at least one domain needs renewing, we can call acme here and
       # stop looking for other domains, acme will take care of them
-      service apache2 stop
+      service ${WEB_SERVER} stop
       /usr/bin/acme.sh $acme_opts
-      service apache2 start
+      service ${WEB_SERVER} start
       exit 0
     fi
   fi
