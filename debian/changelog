@@ -1,3 +1,10 @@
+acmesh (2.8.11-1~buster+bearstech1) buster-bearstech; urgency=medium
+
+  * Nicer permissions in /etc/acme so that unprivileged services can benefit
+    from the certificates.
+
+ -- Lucas BONNET <lbonnet@bearstech.com>  Tue, 26 Jan 2021 16:02:42 +0100
+
 acmesh (2.8.10-1~buster+bearstech1) buster-bearstech; urgency=medium
 
   * Smarter acme.sh wrapper for standalone mode (see https://github.com/bearstech/acme/pull/1)

@@ -17,7 +17,8 @@ set -e
 case "$1" in
   install|upgrade)
     mkdir -p /etc/acme/
-    chmod 600 /etc/acme/
+    chown root:ssl-cert /etc/acme/
+    chmod 750 /etc/acme/
     ;;
 
     abort-upgrade)
