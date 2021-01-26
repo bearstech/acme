@@ -1,4 +1,4 @@
-acmesh (2.8.9-2~buster+bearstech1) buster-bearstech; urgency=medium
+acmesh (2.8.10-1~buster+bearstech1) buster-bearstech; urgency=medium
 
   * Smarter acme.sh wrapper for standalone mode (see https://github.com/bearstech/acme/pull/1)
 
