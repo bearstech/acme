@@ -1,3 +1,9 @@
+acmesh (2.8.9-2~buster+bearstech1) buster-bearstech; urgency=medium
+
+  * Smarter acme.sh wrapper for standalone mode (see https://github.com/bearstech/acme/pull/1)
+
+ -- Lucas BONNET <lbonnet@bearstech.com>  Tue, 26 Jan 2021 09:48:42 +0100
+
 acmesh (2.8.9-1~buster+bearstech1) buster-bearstech; urgency=medium
 
   * Upgrade to upstream 2.8.9-master.
