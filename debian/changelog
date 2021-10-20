@@ -1,3 +1,9 @@
+acmesh (3.0.1~buster+bearstech1) buster-bearstech; urgency=medium
+
+  * Upgrade upstream version to 3.0.1
+
+ -- Lucas BONNET <lbonnet@bearstech.com>  Wed, 20 Oct 2021 14:01:42 +0200
+
 acmesh (2.8.11-1~buster+bearstech1) buster-bearstech; urgency=medium
 
   * Nicer permissions in /etc/acme so that unprivileged services can benefit
