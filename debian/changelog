@@ -1,3 +1,9 @@
+acmesh (3.0.1-2~buster+bearstech1) buster-bearstech; urgency=medium
+
+  * Set default CA to Let's Encrypt in postinst
+
+ -- Lucas BONNET <lbonnet@bearstech.com>  Thu, 21 Oct 2021 09:55:42 +0200
+
 acmesh (3.0.1-1~buster+bearstech1) buster-bearstech; urgency=medium
 
   * Upgrade upstream version to 3.0.1
