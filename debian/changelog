@@ -1,3 +1,9 @@
+acmesh (3.0.1-2~buster+bearstech2) buster-bearstech; urgency=medium
+
+  * Update cron.d to send errors to syslog as well.
+
+ -- Lucas BONNET <lbonnet@bearstech.com>  Wed, 04 May 2022 12:01:42 +000
+
 acmesh (3.0.1-2~buster+bearstech1) buster-bearstech; urgency=medium
 
   * Set default CA to Let's Encrypt in postinst
