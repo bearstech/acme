@@ -1,3 +1,10 @@
+acmesh (3.0.6-1~buster+bearstech2) buster-bearstech; urgency=medium
+
+  * Update to upstream 3.0.6
+  * Set default webroot value
+
+ -- Lucas BONNET <lbonnet@bearstech.com>  Wed, 14 Jun 2023 10:38:42 +0100
+
 acmesh (3.0.1-2~buster+bearstech2) buster-bearstech; urgency=medium
 
   * Update cron.d to send errors to syslog as well.
