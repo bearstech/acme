@@ -1,0 +1,28 @@
+#!/bin/bash
+
+if [ $# -lt 1 ]; then
+  echo "Usage: $0 DEBIAN_BUILD [DIST ...]" >&2
+  exit 1
+fi
+BUILD="$1"
+
+shift 1
+DIST="$*"
+if [ "$DIST" = "" ]; then
+  DIST="squeez wheezy jessie stretch buster bullseye"
+fi
+
+set -e
+
+for dist in $DIST; do
+
+  # change first line of changelog
+  sed -i -e "1 s/~buster+bearstech.*)/~$dist+bearstech$BUILD)/" debian/changelog
+  sed -i -e "1 s/ buster-bearstech;/ $dist-bearstech;/" debian/changelog
+
+  bear-build $dist amd64
+
+  # and reset it
+  git checkout debian/changelog
+  
+done
