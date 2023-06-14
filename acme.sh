@@ -7204,7 +7204,7 @@ _process() {
   _CMD=""
   _domain=""
   _altdomains="$NO_VALUE"
-  _webroot=""
+  _webroot="/var/run/acme/acme-challenge"
   _challenge_alias=""
   _keylength="$DEFAULT_DOMAIN_KEY_LENGTH"
   _accountkeylength="$DEFAULT_ACCOUNT_KEY_LENGTH"
