@@ -1,4 +1,4 @@
-acmesh (3.0.6-1~buster+bearstech3) buster-bearstech; urgency=medium
+acmesh (3.0.6-2~buster+bearstech1) buster-bearstech; urgency=medium
 
   * Disable default webroot when in dns mode, works for our (Bearstech) use case
 
