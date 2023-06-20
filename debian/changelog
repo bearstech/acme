@@ -1,3 +1,9 @@
+acmesh (3.0.6-1~buster+bearstech3) buster-bearstech; urgency=medium
+
+  * Disable default webroot when in dns mode, works for our (Bearstech) use case
+
+ -- Lucas BONNET <lbonnet@bearstech.com>  Tue, 20 Jun 2023 09:07:42 +0100
+
 acmesh (3.0.6-1~buster+bearstech2) buster-bearstech; urgency=medium
 
   * Update to upstream 3.0.6

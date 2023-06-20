@@ -7490,6 +7490,8 @@ _process() {
         wvalue="$2"
         shift
       fi
+      # disable default webroot when in dns mode, works for our (Bearstech) use case
+      _webroot=""
       if [ -z "$_webroot" ]; then
         _webroot="$wvalue"
       else
