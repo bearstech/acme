@@ -7437,6 +7437,8 @@ _process() {
       ;;
     --standalone)
       wvalue="$NO_VALUE"
+      # disable default webroot when in standalone mode, works for our (Bearstech) use case
+      _webroot=""
       if [ -z "$_webroot" ]; then
         _webroot="$wvalue"
       else
