@@ -9,7 +9,7 @@ BUILD="$1"
 shift 1
 DIST="$*"
 if [ "$DIST" = "" ]; then
-  DIST="wheezy jessie stretch buster bullseye"
+  DIST="wheezy jessie stretch buster bullseye bookworm"
 fi
 
 set -e
