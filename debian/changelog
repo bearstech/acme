@@ -1,3 +1,9 @@
+acmesh (3.0.9-1~buster+bearstech1) buster-bearstech; urgency=medium
+
+  * Add bookworm build
+
+ -- Lucas BONNET <lbonnet@bearstech.com>  Thu, 29 Jun 2023 09:27:42 +0200
+
 acmesh (3.0.8-1~buster+bearstech1) buster-bearstech; urgency=medium
 
   * Disable default webroot when in standalone mode too
