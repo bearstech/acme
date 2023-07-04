@@ -7212,7 +7212,7 @@ _process() {
   _key_file=""
   _ca_file=""
   _fullchain_file=""
-  _reloadcmd=""
+  _reloadcmd="/usr/bin/acme-reload"
   _password=""
   _accountconf=""
   _useragent=""
