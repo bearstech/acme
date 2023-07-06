@@ -1,3 +1,9 @@
+acmesh (3.0.10-1~buster+bearstech1) buster-bearstech; urgency=medium
+
+  * Add default reload command in /usr/bin/acme-reload
+
+ -- Lucas BONNET <lbonnet@bearstech.com>  Thu, 06 Jul 2023 11:54:02 +0200
+
 acmesh (3.0.9-1~buster+bearstech1) buster-bearstech; urgency=medium
 
   * Add bookworm build
