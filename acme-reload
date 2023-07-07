@@ -6,7 +6,6 @@
 # Reload any webserver if active
 for s in nginx apache2 haproxy; do
     if systemctl is-active $s >/dev/null; then
-        echo "[$(date)] Reloading $s" >&2
         systemctl reload $s
     fi
 done
