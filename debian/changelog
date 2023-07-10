@@ -1,3 +1,9 @@
+acmesh (3.0.11-1~buster+bearstech1) buster-bearstech; urgency=medium
+
+  * Log wrapper errors through syslog
+
+ -- Lucas BONNET <lbonnet@bearstech.com>  Mon, 10 Jul 2023 15:12:57 +0200
+
 acmesh (3.0.10-1~buster+bearstech1) buster-bearstech; urgency=medium
 
   * Add default reload command in /usr/bin/acme-reload
