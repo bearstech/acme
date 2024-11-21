@@ -1,5 +1,5 @@
 acme.sh      usr/bin
-acme-reload  usr/bin
+acme-reload  etc/acme
 acme-wrapper usr/bin
 deploy/*     usr/share/acme/deploy
 dnsapi/*     usr/share/acme/dnsapi

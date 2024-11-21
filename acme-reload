@@ -1,7 +1,7 @@
 #! /bin/bash
 
-# Can add extra reload steps in /usr/local/sbin/acme-reload-extra
-[ -x /usr/local/sbin/acme-reload-extra ] && source /usr/local/sbin/acme-reload-extra
+# Can add extra reload steps in /etc/acme/acme-reload-extra
+[ -x /etc/acme/acme-reload-extra ] && source /etc/acme/acme-reload-extra
 
 # Reload any webserver if active
 for s in nginx apache2 haproxy; do
