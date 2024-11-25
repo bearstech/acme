@@ -1,3 +1,9 @@
+acmesh (3.1.0-1~buster+bearstech1) buster-bearstech; urgency=medium
+
+  * Upgrade to upstream 3.1.0
+
+ -- Lucas Bonnet <lbonnet@bearstech.com>  Mon, 25 Nov 2024 16:30:28 +0100
+
 acmesh (3.0.12-1~buster+bearstech1) buster-bearstech; urgency=medium
 
   * Move acme-reload to /etc/acme/
