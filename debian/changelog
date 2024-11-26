@@ -1,3 +1,9 @@
+acmesh (3.1.0-2~buster+bearstech1) buster-bearstech; urgency=medium
+
+  * Fix reloadcmd path to /etc/acme/acme-reload
+
+ -- Lucas Bonnet <lbonnet@bearstech.com>  Tue, 26 Nov 2024 10:18:31 +0100
+
 acmesh (3.1.0-1~buster+bearstech1) buster-bearstech; urgency=medium
 
   * Upgrade to upstream 3.1.0

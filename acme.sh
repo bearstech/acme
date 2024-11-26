@@ -7318,7 +7318,7 @@ _process() {
   _key_file=""
   _ca_file=""
   _fullchain_file=""
-  _reloadcmd="/usr/bin/acme-reload"
+  _reloadcmd="/etc/acme/acme-reload"
   _password=""
   _accountconf=""
   _useragent=""
