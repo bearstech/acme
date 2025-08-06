@@ -11,6 +11,7 @@ if [ $# -lt 1 ]; then
 fi
 BUILD="$1"
 
+shift 1
 DISTROS="$*"
 if [ "$DISTROS" = "" ]; then
   DISTROS="jessie stretch buster bullseye bookworm trixie"
