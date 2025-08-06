@@ -24,7 +24,7 @@ release_versions["bullseye"]="11"
 release_versions["bookworm"]="12"
 release_versions["trixie"]="13"
 
-for dist in $DIST; do
+for dist in $DISTROS; do
 
   # Generate distro-specific changelog
   dch -v "$acmesh_version+deb${release_versions[$dist]}+bear${BUILD}" "Debian package automated build"
