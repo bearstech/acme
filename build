@@ -27,7 +27,7 @@ release_versions["trixie"]="13"
 for dist in $DISTROS; do
 
   # Generate distro-specific changelog
-  dch -v "$acmesh_version+deb${release_versions[$dist]}+bear${BUILD}" "Debian package automated build"
+  dch -b -v "$acmesh_version+deb${release_versions[$dist]}+bear${BUILD}" "Debian package automated build"
   sed -i -e "1 s/UNRELEASED/$dist-bearstech/" debian/changelog
 
   bear-build $dist amd64
