@@ -1,3 +1,9 @@
+acmesh (3.1.1+deb13+bear1) trixie-bearstech; urgency=medium
+
+  * fiddle with build numbers to get a release built for every distro
+
+ -- Lucas Bonnet <lbonnet@bearstech.com>  Tue, 12 Aug 2025 16:33:27 +0200
+
 acmesh (3.1.0-2~buster+bearstech1) buster-bearstech; urgency=medium
 
   * Fix reloadcmd path to /etc/acme/acme-reload
