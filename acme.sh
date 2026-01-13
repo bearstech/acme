@@ -5435,6 +5435,8 @@ $_authorizations_map"
 
   # [Bearstech] Concatenate key, cert and then chain into a single PEM file for haproxy
   CERT_KEYFULLCHAIN_PATH="$DOMAIN_PATH/$domain.key+cer"
+  touch "$CERT_KEYFULLCHAIN_PATH"
+  chmod 600 "$CERT_KEYFULLCHAIN_PATH"
   cat "$CERT_KEY_PATH" "$CERT_FULLCHAIN_PATH" > "$CERT_KEYFULLCHAIN_PATH"
   _info "Key + Cert + Chain (for haproxy) PEM is there: $(__green " $CERT_KEYFULLCHAIN_PATH ")"
 
