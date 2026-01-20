@@ -95,7 +95,8 @@ B64CONF_START="__ACME_BASE64__START_"
 B64CONF_END="__ACME_BASE64__END_"
 
 ECC_SEP="_"
-ECC_SUFFIX="${ECC_SEP}ecc"
+# [Bearstech] do not use a different suffix for ECC
+ECC_SUFFIX=""
 
 # [Bearstech] --quiet option
 QUIET="0"
