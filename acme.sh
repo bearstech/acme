@@ -14,6 +14,7 @@ _WINDOWS_SCHEDULER_NAME="$PROJECT_NAME.cron"
 
 _SCRIPT_="$0"
 
+_SCRIPT_HOME="/usr/share/acme"
 _SUB_FOLDER_NOTIFY="notify"
 _SUB_FOLDER_DNSAPI="dnsapi"
 _SUB_FOLDER_DEPLOY="deploy"
